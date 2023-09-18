@@ -1,38 +1,234 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #518e30;
+  overflow: visible;
+  width: 100%;
+  text-align: center;
+  color: white;
+  padding-top: 5px;
+}
+
+.input{
+  position: fixed;
+  bottom: 0px;
+  background-color: #518e30;
+  width: 100%;
+  padding: 20px;
+}
+
+.messages-list {
+  padding: 20px 0;
+  width: 100%;
+  margin: 0 auto;
+  list-style: none;
+  padding: 10px 20px 60px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex-grow: 1;
+  overflow: auto;
+  position: static;
+  padding: 30px 2px 100px;
+}
+
+.send-message{
+  min-width: fit-content;
+  padding-left: 25%
+}
+
+.messages-message {
+  display: flex;
+  margin-top: 10px;
+}
+
+.messages-message.currentMember {
+  justify-content: flex-end;
+  flex-direction: row;
+  text-align: left;
+}
+
+.message-content {
+  display: inline-block;
+  transition: .2s;
+}
+
+.message-content:hover {
+  transform: scale(1.2);
+  transition: .2s;
+}
+
+.messages-message > .avatar {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 10px -10px;
+}
+
+.message-content > .username {
+  display: block;
+  color: gray;
+  font-size: 14px;
+  padding-bottom: 4px;
+  padding-right: 78%;
+}
+
+.message-content > .text {
+  padding: 10px;
+  max-width: 400px;
+  margin: 0;
+  border-radius: 12px;
+  background-color: cornflowerblue;
+  color: white;
+  display: grid;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, .8);
+}
+
+.avatar{
+  width: 30%;
+}
+
+.currentMember > .message-content .text {
+  background-color: rgb(15, 30, 161);
+}
+
+form {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  max-width: 900px;
+  margin: 0px;
+}
+
+input {
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  flex-grow: 1;
+  border: 1px solid rgb(15, 30, 161);
+}
+
+button {
+  padding: 5px 10px;
+  font-size: 16px;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  margin-left: 10px;
+  border: 1px solid transparent;
+  transition: .2s;
+}
+
+button:disabled {
+  background-color: rgba(17, 0, 255, 0.5);
+  color: rgba(255, 255, 255, .5);
+  transition: .2s;
+}
+
+button:hover {
+  background-color: yellow;
+  color: #41308e;
+  border: 1px solid black;
+  transform: scale(1.1);
+  transition: .2s;
+}
+
+.login {
+  position: fixed;
+  bottom: 20%;
+  left: 30%;
+  width: 40%;
+  padding: 20px;
+  background-color: #518e30;
+}
+
+login > h1{
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+loginImage{
+  top: -200px;
+  left: -200px;
+  height: 200px;
+  width: 100%;
+  position: absolute;
+  padding: 25% 50% 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.logo{
+  height: 400px;
+  width: 400px;
+  background-image: url('./assets/background.png');
+  background-size: cover;
+}
+
+.logout{
+  position: relative;
+  top: 10px;
+  right: 10px;
+  float: right;
+}
+
+.enterUsername{
+  min-width: 100%;
+  background: white;
+}
+
+.username{
+  padding-top: 40px;
+}
+
+@media screen and (max-width: 480px) {
+  .App-header{
+    height: 60px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .App-title{
+    padding-top: 15px;
   }
+
+  .logout{
+    top: -4px;
+    right: 40px;
+    font-size: .8em;
+  }
+
+  h1{
+    font-size: 1em;
+  }
+
+  h2{
+    font-size: .9em !important;
+  }
+
+  h4{
+    font-size: .7em !important;
+  }
+
+  .loginImage{
+    position: relative;
+    top: 0;
+    left: 0;
+    background-color: red;
+    width: 100%;
+    height: 100%;
+    padding-left: 40%;
+    padding-bottom: 20%;
+  }
+
+  .logo{
+display: none;
+  }
+
+  input, input::placeholder{
+    font-size: .9em;
+  }
+
 }
