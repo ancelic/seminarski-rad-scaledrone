@@ -5,6 +5,7 @@ import MessageList from './MessageList';
 import SendMessage from './SendMessage';
 import randomColor from '../utils/randomColor'; 
 import generateRandomRoboUrl from '../utils/randomRoboUrl';
+import useStore from '../utils/store'; 
 
 
 let headerUserName = '';
@@ -14,18 +15,22 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [member, setMember] = useState({ username: '', color: '' });
   const droneRef = useRef(null);
-  const randomColorF = randomColor;
+  const randomColorF = randomColor();
   const randomUrl = generateRandomRoboUrl();
-  const soba = "observable-soba";
+  const soba = "observable-soba-za-caskanje";
   const channelId = "7UhDBTQiofgepjRR";
+  const { numMember, setNumMember } = useStore();
+  let membersOnline = []
 
 
   const handleOnUserLogin = (user) => {
+    console.log("Broj onine clanova: " + numMember);
     if (user !== '') {
       droneRef.current = new window.Scaledrone(channelId, {
         data: { username: user, color: randomColorF }
       });
 
+      console.log("Boja je: " + Object.keys(randomColorF));
       headerUserName = user;
       console.log('User ' + user + ' logged in');
 
@@ -46,7 +51,24 @@ const Chat = () => {
 
       const room = droneRef.current.subscribe(soba);
       console.log('Room subscribed');
+      room.on('members', m => {
+        membersOnline = m;
+        setNumMember(membersOnline.length);
+      });
+    
+      room.on('member_join', member => {
+        membersOnline.push(member);
+        setNumMember(membersOnline.length);
+      });
+    
+      room.on('member_leave', ({id}) => {
+        const index = membersOnline.findIndex(member => member.id === id);
+        membersOnline.splice(index, 1);
+        setNumMember(membersOnline.length);
+      });
+    
 
+    
       room.on('data', (data, member) => {
         setMessages((prevMessages) => [...prevMessages, { member, text: data }]);
 
@@ -68,6 +90,7 @@ const Chat = () => {
   };
 
   const onSendMessage = (message) => {
+    console.log("Broj onine clanova: " + numMember);
     droneRef.current.publish({
       room: soba,
       message,
