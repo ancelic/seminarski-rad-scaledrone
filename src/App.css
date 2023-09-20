@@ -188,47 +188,78 @@ loginImage{
 @media screen and (max-width: 480px) {
   .App-header{
     height: 60px;
+    background-color: #518e30;
+    overflow: visible;
+    width: 100%;
+    text-align: center;
+    color: #1610cc;
+
   }
 
   .App-title{
     padding-top: 15px;
   }
 
-  .logout{
+  .logout {
     top: -4px;
     right: 40px;
-    font-size: .8em;
+    font-size: 0.8em;
   }
 
-  h1{
+
+  h1 {
     font-size: 1em;
   }
 
-  h2{
-    font-size: .9em !important;
+  h2 {
+    font-size: 0.9em !important;
   }
 
-  h4{
-    font-size: .7em !important;
+  h4 {
+    font-size: 0.7em !important;
   }
 
-  .loginImage{
+  input,
+  input::placeholder {
+    font-size: 0.9em;
+  }
+
+  form {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 0px;
+  }
+
+  .send-message {
+    min-width: -moz-fit-content;
+    min-width: fit-content;
+    padding-left: 0%;
+}
+
+  .loginImage {
     position: relative;
     top: 0;
     left: 0;
     background-color: red;
     width: 100%;
     height: 100%;
-    padding-left: 40%;
-    padding-bottom: 20%;
+    padding-left: 0%;
+    padding-bottom: 0%;
   }
 
-  .logo{
-display: none;
+  .logo {
+    display: none;
   }
 
-  input, input::placeholder{
-    font-size: .9em;
-  }
+  .login {
+    position: fixed;
+    bottom: 40%;
+    left: 18%;
+    width: 40%;
+    padding: 34px;
+    background-color: #518e30;
+}
 
 }
